@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataFaker.Web", "DataFaker\DataFaker.Web.csproj", "{B5695E55-47BB-4D3F-A4DD-4A886F9A2A3F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataFaker.Domain", "DataFaker.Domain\DataFaker.Domain.csproj", "{6E31FF57-97BF-4086-AA49-0B290A9D2382}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataFaker.Web", "DataFaker.Web\DataFaker.Web.csproj", "{31F6E99D-C7DC-4949-B45F-0057E203306B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B5695E55-47BB-4D3F-A4DD-4A886F9A2A3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5695E55-47BB-4D3F-A4DD-4A886F9A2A3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5695E55-47BB-4D3F-A4DD-4A886F9A2A3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5695E55-47BB-4D3F-A4DD-4A886F9A2A3F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6E31FF57-97BF-4086-AA49-0B290A9D2382}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6E31FF57-97BF-4086-AA49-0B290A9D2382}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E31FF57-97BF-4086-AA49-0B290A9D2382}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E31FF57-97BF-4086-AA49-0B290A9D2382}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F6E99D-C7DC-4949-B45F-0057E203306B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F6E99D-C7DC-4949-B45F-0057E203306B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F6E99D-C7DC-4949-B45F-0057E203306B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F6E99D-C7DC-4949-B45F-0057E203306B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

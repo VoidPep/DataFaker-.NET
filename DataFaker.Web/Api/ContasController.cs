@@ -12,7 +12,7 @@ public class ContasController : BaseApiController
     public ContasController(ISessionService sessionService) => _sessionService = sessionService;
 
     [AllowAnonymous, HttpPost("Login")]
-    public async Task<IActionResult> Login(LoginRequest model)
+    public async Task<IActionResult> Login([FromBody] LoginRequest model)
     {
         if (string.IsNullOrWhiteSpace(model.Senha) || string.IsNullOrWhiteSpace(model.Email))
             return Error("Login e a senha devem estar preenchidos");
@@ -33,7 +33,10 @@ public class ContasController : BaseApiController
 
         await _sessionService.LoadIdentity(HttpContext, usuarioDaSessao);
 
-        return Success();
+        return Ok(new
+        {
+            RedirectUrl = Url.Action("Index", "Home")
+        });
     }
 
     //[HttpPost, AllowAnonymous, Route("AutoCadastro")]

@@ -2,7 +2,17 @@
     ViewData["Title"] = "Home Page";
 }
 
+@section Scripts {
+    <script src="~/js/gerador.js"></script>
+}
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>
+        Bem vindo!
+    </p>
+    <small>Esse é um gerador de dados fícticios para o formato de arquivo .xlsx, comece selecionando a quantidade de dados que deseja gerar</small>
+
+    <div class="d-flex justify-content-center mt-3">
+        <input type="number" min="10" max="1000" value="" class="form-control w-auto"/>
+    </div>
 </div>

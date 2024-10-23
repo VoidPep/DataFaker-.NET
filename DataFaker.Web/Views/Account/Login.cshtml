@@ -1,12 +1,16 @@
 ﻿@{
+    ViewBag.Title = "Login";
     Layout = "_LayoutNotLogged";
+}
+@section Scripts {
+    <script src="~/js/Account/login.js"></script>
 }
 
 <div class="container">
     <div class="d-flex w-100 min-vh-100 justify-content-center align-items-center">
         <div class="card rounded shadow">
             <div class="card-body py-4 px-5">
-                <form id="loginForm">
+                <form id="login-form">
                     <div class="d-flex flex-column">
                         <span class="fw-bold align-self-center">LOGIN</span>
                         <div class="form-group mt-3">
@@ -24,33 +28,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    // $(document).ready(function () {
-    //     $('#loginForm').on('submit', function (event) {
-    //         event.preventDefault();
-
-    //         enviarDados();
-    //     });
-    // });
-
-    function enviarDados() {
-        const dados = {
-            email: $('#email').val(),
-            senha: $('#senha').val()
-        };
-
-        $.ajax({
-            url: '/api/Contas/Login',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(dados),
-            success: function (resultado) {
-                console.log(resultado);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.error('Erro:', textStatus, errorThrown);
-            }
-        });
-    }
-</script>
