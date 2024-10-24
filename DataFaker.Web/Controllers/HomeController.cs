@@ -37,12 +37,15 @@ namespace DataFaker.Web.Controllers
                 Nome = "dados_gerados.xlsx",
             };
 
-            _emailService.EnviarEmailAsync(
-                "pedrohm1009@gmail.com",
-                "DataFaker",
-                "Corpo do Email",
-                anexo
-            );
+            try
+            {
+                _emailService.EnviarEmailAsync("pedrohm1009@gmail.com", "DataFaker", "Corpo do Email", anexo);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
             return File(stream, anexo.ContentType, anexo.Nome);
         }

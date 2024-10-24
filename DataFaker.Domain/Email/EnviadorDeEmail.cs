@@ -1,24 +1,30 @@
-﻿namespace DataFaker.Domain.Email;
+﻿using System.Net;
+using System.Net.Mail;
 
-using DataFaker.Domain.Componentes;
-using System.Threading.Tasks;
+namespace DataFaker.Domain.Email;
 
 public interface IEmailService
 {
-    Task EnviarEmailAsync(string destinatario, string assunto, string corpo, Anexo anexo);
+    void EnviarEmailAsync(string destinatario, string assunto, string corpo, Anexo anexo);
 }
 
 public class EmailService : IEmailService
 {
-    public async Task EnviarEmailAsync(string destinatario, string assunto, string corpo, Anexo anexo)
+    public void EnviarEmailAsync(string destinatario, string assunto, string corpo, Anexo anexo)
     {
-        var client = new MailgunClient(App.MailgunToken, App.MailgunDomain);
-        var response = await client.SendEmailAsync(
-            "Excited User <mailgun@sandbox32bb813a8cc5402c86976e2b857a68d2.mailgun.org>",
-            "pedrohm1009@gmail.com",
-            "Hello",
-            "Testing some Mailgun awesomeness!"
-        );
+        var mailMessage = new MailMessage();
+        mailMessage.From = new MailAddress("");
+        mailMessage.To.Add(destinatario);
+        mailMessage.Subject = "Hello world";
+        mailMessage.Body = "This is a test email sent using C#.Net";
+
+        var smtpClient = new SmtpClient("smtp.gmail.com");
+        smtpClient.Host = "smtp.gmail.com";
+        smtpClient.Port = 587;
+        smtpClient.UseDefaultCredentials = false;
+        smtpClient.Credentials = new NetworkCredential("", "");
+        smtpClient.EnableSsl = true;
+
+        smtpClient.Send(mailMessage);
     }
 }
-
