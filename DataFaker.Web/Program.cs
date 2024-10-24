@@ -1,9 +1,13 @@
 using DataFaker.Web.Configurations;
+using DataFaker.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddControllersWithViews();
     builder.AddAuthenticationConfiguration();
+
+    var services = builder.Services;
+    services.AddDomainInjection();
 }
 
 var app = builder.Build();

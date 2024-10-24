@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewBag.Title = "Gerador";
 }
 
 @section Scripts {
@@ -12,7 +12,10 @@
     </p>
     <small>Esse é um gerador de dados fícticios para o formato de arquivo .xlsx, comece selecionando a quantidade de dados que deseja gerar</small>
 
-    <div class="d-flex justify-content-center mt-3">
-        <input type="number" min="10" max="1000" value="" class="form-control w-auto"/>
-    </div>
+    <form action="/Home/Gerar" method="get">
+        <div class="d-flex justify-content-center mt-3">
+            <input type="number" min="10" max="1000" value="10" name="quantidade" class="form-control w-auto" />
+            <button type="submit" class="btn btn-primary">Gerar</button>
+        </div>
+    </form>
 </div>
