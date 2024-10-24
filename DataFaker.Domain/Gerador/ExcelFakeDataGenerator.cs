@@ -83,4 +83,5 @@ public class ExcelFakeDataGenerator : IExcelFakeDataGenerator
         _worksheet.Cells[1, 2].Value = "E-mail";
         _worksheet.Cells[1, 3].Value = "Data de nascimento";
     }
+
 }

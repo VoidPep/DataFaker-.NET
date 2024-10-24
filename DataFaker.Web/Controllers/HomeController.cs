@@ -36,18 +36,19 @@ namespace DataFaker.Web.Controllers
                 ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 Nome = "dados_gerados.xlsx",
             };
-
             try
             {
-                _emailService.EnviarEmailAsync("pedrohm1009@gmail.com", "DataFaker", "Corpo do Email", anexo);
+                var corpo = "Olá!\nSegue em anexo o arquivo com os dados gerados.\nAtenciosamente,\nPedro";
+
+                var to = Environment.GetEnvironmentVariable("SMTP_TO") ?? "";
+
+                _emailService.EnviarEmailAsync("", "DataFaker - Dados Gerados", corpo, anexo);
+                return File(stream, anexo.ContentType, anexo.Nome);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                return File(stream, anexo.ContentType, anexo.Nome);
             }
-
-            return File(stream, anexo.ContentType, anexo.Nome);
         }
     }
 }
