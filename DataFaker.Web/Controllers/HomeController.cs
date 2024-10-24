@@ -1,3 +1,4 @@
+using DataFaker.Domain.Email;
 using DataFaker.Domain.Gerador;
 using Microsoft.AspNetCore.Mvc;
 
@@ -5,6 +6,15 @@ namespace DataFaker.Web.Controllers
 {
     public class HomeController : BaseController
     {
+        private readonly IExcelFakeDataGenerator _generator;
+        private readonly IEmailService _emailService;
+
+        public HomeController(IExcelFakeDataGenerator generator, IEmailService emailService)
+        {
+            _generator = generator;
+            _emailService = emailService;
+        }
+
         public IActionResult Index()
         {
             if (Usuario == null)
@@ -13,14 +23,28 @@ namespace DataFaker.Web.Controllers
             return View();
         }
 
-        public IActionResult Gerar([FromQuery] int quantidade, [FromServices] IExcelFakeDataGenerator generator)
+        public IActionResult Gerar([FromQuery] int quantidade)
         {
             quantidade = quantidade < 10 ? 10 : quantidade;
             quantidade = quantidade > 1000 ? 1000 : quantidade;
 
-            var stream = generator.Generate(quantidade);
+            var stream = _generator.Generate(quantidade);
 
-            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "dados_gerados.xlsx");
+            var anexo = new Anexo
+            {
+                Stream = stream,
+                ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                Nome = "dados_gerados.xlsx",
+            };
+
+            _emailService.EnviarEmailAsync(
+                "pedrohm1009@gmail.com",
+                "DataFaker",
+                "Corpo do Email",
+                anexo
+            );
+
+            return File(stream, anexo.ContentType, anexo.Nome);
         }
     }
 }
