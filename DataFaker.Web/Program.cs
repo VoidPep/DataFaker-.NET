@@ -1,5 +1,8 @@
 using DataFaker.Web.Configurations;
 using DataFaker.Domain;
+using DataFaker.Context;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -7,6 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
     builder.AddAuthenticationConfiguration();
 
     var services = builder.Services;
+
+    var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+
+    services.AddDbContext<DataFakerContext>(options =>
+    {
+        options.ConfigureWarnings(warningsConfigurationBuilder => warningsConfigurationBuilder.Ignore(CoreEventId.PossibleIncorrectRequiredNavigationWithQueryFilterInteractionWarning));
+        options.UseSqlite(connectionString);
+    });
+
     services.AddDomainInjection();
 }
 
