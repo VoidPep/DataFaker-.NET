@@ -36,7 +36,12 @@ namespace DataFaker.Web.Controllers
                 ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 Nome = "dados_gerados.xlsx",
             };
-            var corpo = "Olá!\nSegue em anexo o arquivo com os dados gerados.\nAtenciosamente,\nPedro";
+            var corpo = "Olá!\n" +
+                "Você está recebendo um e-mail automático de DataFaker, um gerador de dados fictícios" +
+                "Link do github: https://github.com/VoidPep/DataFaker-.NET/tree/master" +
+                "Segue em anexo o arquivo com os dados gerados.\n" +
+                "Atenciosamente,\n" +
+                "Pedro";
 
             //Environment.GetEnvironmentVariable("SMTP_TO")
             var to = email == null || email == "" ? "" : email;
