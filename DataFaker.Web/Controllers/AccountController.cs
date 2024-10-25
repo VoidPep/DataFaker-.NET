@@ -19,6 +19,11 @@ namespace DataFaker.Web.Controllers
             return View();
         }
 
+        public IActionResult Register()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> LogoutAsync()
         {
             await _sessionService.UnloadIdentity(HttpContext);

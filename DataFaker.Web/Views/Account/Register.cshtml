@@ -1,9 +1,9 @@
 ﻿@{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Registrar-se";
     Layout = "_LayoutNotLogged";
 }
 @section Scripts {
-    <script src="~/js/Account/login.js"></script>
+    <script src="~/js/Account/register.js"></script>
 }
 
 <div class="container">
@@ -12,7 +12,11 @@
             <div class="card-body py-4 px-5">
                 <form id="login-form">
                     <div class="d-flex flex-column">
-                        <span class="fw-bold align-self-center">LOGIN</span>
+                        <span class="fw-bold align-self-center">AUTO-CADASTRO</span>
+                        <div class="form-group mt-3">
+                            <label for="nome">Nome</label>
+                            <input type="text" name="Nome" class="form-control" id="nome" placeholder="Inserir Nome" required>
+                        </div>
                         <div class="form-group mt-3">
                             <label for="email">Email</label>
                             <input type="email" name="Email" class="form-control" id="email" placeholder="Inserir E-mail" required>
@@ -23,7 +27,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary mt-3">Entrar</button>
                         <small>
-                            <a href="@Url.Action("Register","Account")">Criar uma conta</a>
+                            <a href="@Url.Action("Login","Account")">Já possuo uma conta</a>
                         </small>
                     </div>
                 </form>
