@@ -13,9 +13,12 @@
     <small>Esse é um gerador de dados fícticios para o formato de arquivo .xlsx, comece selecionando a quantidade de dados que deseja gerar</small>
 
     <form action="/Home/Gerar" method="get">
-        <div class="d-flex justify-content-center mt-3">
-            <input type="number" min="10" max="1000" value="10" name="quantidade" class="form-control w-auto" />
-            <button type="submit" class="btn btn-primary">Gerar</button>
+        <div class="d-flex flex-column justify-content-center align-items-center mt-3">
+            <input type="number" min="10" max="1000" value="10" name="quantidade" class="form-control w-50" />
+            <small class="mt-3">Coloque também um e-mail para enviarmos o arquivo gerado para você</small>
+            <input type="email" name="email" class="form-control w-50" />
+
+            <button type="submit" class="btn btn-primary mt-3">Gerar</button>
         </div>
     </form>
 </div>
