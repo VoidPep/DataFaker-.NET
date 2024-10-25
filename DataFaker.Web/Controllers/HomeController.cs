@@ -43,8 +43,8 @@ namespace DataFaker.Web.Controllers
                 "Atenciosamente,\n" +
                 "Pedro";
 
-            //Environment.GetEnvironmentVariable("SMTP_TO")
-            var to = email == null || email == "" ? "" : email;
+            var mailto = Environment.GetEnvironmentVariable("SMTP_TO");
+            var to = email == null || email == "" ? mailto : email;
 
             if (to == null || to == "")
                 return File(stream, anexo.ContentType, anexo.Nome);
