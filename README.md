@@ -36,6 +36,10 @@ cd DataFaker-.NET
 ```bash
 dotnet restore
 ```
+- Existe um banco de dados SQLite no projeto, então para executar a criação das tabelas basta rodar um:
+```bash
+dotnet ef database update --project DataFaker.Context --startup-project DataFaker.Web
+```
 - Por fim agora é possível compilar o projeto e após isso rodá-lo:
 - Obs.: O comando `dotnet run` já executa um build antes da execução
 ```bash
