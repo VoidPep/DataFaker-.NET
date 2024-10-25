@@ -9,6 +9,7 @@ setx SMTP_PASSWORD "chave_de_acesso_app"
 setx SMTP_EMAIL "email_enviador" 
 setx SMTP_TO "email_que_recebera"
 ```
+obs: Caso opte por não preencher o <input> com o email na hora da geração do email o sistema vai pegar o valor que está na variável `SMTP_TO`
 
 Essas variáveis ficam salvas no sistema operacional, se quiser remove-las basta ir até
 `Caso esteja utilizando windows:`
