@@ -3,13 +3,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataFaker.Context;
 
-public class DataFakerContext : DbContext
+public interface IDataFakerContext
+{
+    DbSet<Usuario> Usuarios { get; set; }
+}
+
+public class DataFakerContext(DbContextOptions options) : DbContext(options), IDataFakerContext
 {
     public DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=datafaker.db");
+        var dbPath = Path.Combine(Path.GetTempPath(), "datafaker.db");
+        optionsBuilder.UseSqlite($"Data Source={dbPath}");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

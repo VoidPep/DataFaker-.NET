@@ -19,6 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
         options.UseSqlite(connectionString);
     });
 
+    services.AddTransient<IDataFakerContext, DataFakerContext>();
     services.AddDomainInjection();
 }
 
