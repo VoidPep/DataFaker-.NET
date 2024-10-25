@@ -1,5 +1,5 @@
 ﻿(function () {
-    $('#login-form').on('submit', function (event) {
+    $('#register-form').on('submit', function (event) {
         event.preventDefault();
 
         var apiUrl = '/api/Contas/AutoCadastro';
@@ -13,10 +13,10 @@
             dataType: 'json',
             success: function (data) {
                 console.log(data)
-                location.href = data.redirectUrl
+                location.href = "/"
             },
             error: function (error) {
-                
+                alert(error.message)
             }
         });
     });

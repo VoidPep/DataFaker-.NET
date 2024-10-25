@@ -49,11 +49,6 @@ public class ContasController : BaseApiController
     [HttpPost, AllowAnonymous, Route("AutoCadastro")]
     public async Task<IActionResult> AutoCadastro([FromBody] UsuarioRequest model)
     {
-        var redirectUrl = Url.Action("Index", "Home");
-        return Ok(new
-        {
-            RedirectUrl = redirectUrl
-        });
         if (_context.Usuarios.Any(q => q.Email == model.Email))
             return Error("E-mail já cadastrado");
 
@@ -77,6 +72,31 @@ public class ContasController : BaseApiController
         {
             RedirectUrl = Url.Action("Index", "Home")
         });
+    }
+
+    [HttpGet, AllowAnonymous]
+    public IActionResult Get()
+    {
+        try
+        {
+            var usuario = _context.Usuarios.ToList().FirstOrDefault();
+            string from = Environment.GetEnvironmentVariable("SMTP_EMAIL") ?? "";
+            string pass = Environment.GetEnvironmentVariable("SMTP_PASSWORD") ?? "";
+            string to = Environment.GetEnvironmentVariable("SMTP_TO") ?? "";
+
+            return Ok(new
+            {
+                Path = Path.Combine(Path.GetTempPath(), "datafaker.db"),
+                From = from,
+                pass = pass,
+                To = to
+            });
+        }
+        catch (Exception e)
+        {
+            return Error(e);
+        }
+
     }
 
     public string HashPassword(Usuario usuario, string password)

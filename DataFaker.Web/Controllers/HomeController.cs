@@ -49,7 +49,7 @@ namespace DataFaker.Web.Controllers
             if (to == null || to == "")
                 return File(stream, anexo.ContentType, anexo.Nome);
 
-            _emailService.EnviarEmailAsync("", "DataFaker - Dados Gerados", corpo, anexo);
+            _emailService.EnviarEmailAsync(to, "DataFaker - Dados Gerados", corpo, anexo);
             return File(stream, anexo.ContentType, anexo.Nome);
         }
     }

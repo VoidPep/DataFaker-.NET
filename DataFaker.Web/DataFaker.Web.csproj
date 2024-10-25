@@ -26,4 +26,10 @@
 	  </Content>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="datafaker.db">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>

@@ -3,6 +3,7 @@ using DataFaker.Domain;
 using DataFaker.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -21,6 +22,8 @@ var builder = WebApplication.CreateBuilder(args);
 
     services.AddTransient<IDataFakerContext, DataFakerContext>();
     services.AddDomainInjection();
+
+
 }
 
 var app = builder.Build();
@@ -42,6 +45,12 @@ var app = builder.Build();
     app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<DataFakerContext>();
+        dbContext.Database.Migrate();
+    }
 }
 
 app.Run();

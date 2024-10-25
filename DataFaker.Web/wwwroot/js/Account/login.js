@@ -13,10 +13,10 @@
             dataType: 'json',
             success: function (data) {
                 console.log(data)
-                location.href = data.redirectUrl
+                location.href = "/";
             },
             error: function (error) {
-                
+                alert(error.message)
             }
         });
     });
