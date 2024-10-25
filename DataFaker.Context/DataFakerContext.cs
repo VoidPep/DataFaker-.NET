@@ -6,6 +6,8 @@ namespace DataFaker.Context;
 public interface IDataFakerContext
 {
     DbSet<Usuario> Usuarios { get; set; }
+
+    int SaveChanges();
 }
 
 public class DataFakerContext(DbContextOptions options) : DbContext(options), IDataFakerContext

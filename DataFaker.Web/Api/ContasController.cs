@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using DataFaker.Domain.Helpers;
 
 namespace DataFaker.Web.Api;
 
@@ -29,7 +30,7 @@ public class ContasController : BaseApiController
         var usuario = _context.Usuarios
             .FirstOrDefault(q => q.Email == model.Email);
 
-        if (usuario == null || !VerifyPassword(usuario, usuario.Senha, model.Senha))
+        if (usuario == null || !PasswordHelper.VerifyPassword(usuario.Senha, model.Senha))
             return Error("Login ou senha incorretos");
 
         var usuarioDaSessao = new SessionUser
@@ -58,7 +59,10 @@ public class ContasController : BaseApiController
             Email = model.Email,
         };
 
-        usuario.Senha = HashPassword(usuario, model.Senha);
+        usuario.Senha = PasswordHelper.HashPassword(model.Senha);
+
+        _context.Usuarios.Add(usuario);
+        _context.SaveChanges();
 
         var usuarioDaSessao = new SessionUser
         {
@@ -72,43 +76,5 @@ public class ContasController : BaseApiController
         {
             RedirectUrl = Url.Action("Index", "Home")
         });
-    }
-
-    [HttpGet, AllowAnonymous]
-    public IActionResult Get()
-    {
-        try
-        {
-            var usuario = _context.Usuarios.ToList().FirstOrDefault();
-            string from = Environment.GetEnvironmentVariable("SMTP_EMAIL") ?? "";
-            string pass = Environment.GetEnvironmentVariable("SMTP_PASSWORD") ?? "";
-            string to = Environment.GetEnvironmentVariable("SMTP_TO") ?? "";
-
-            return Ok(new
-            {
-                Path = Path.Combine(Path.GetTempPath(), "datafaker.db"),
-                From = from,
-                pass = pass,
-                To = to
-            });
-        }
-        catch (Exception e)
-        {
-            return Error(e);
-        }
-
-    }
-
-    public string HashPassword(Usuario usuario, string password)
-    {
-        var hasher = new PasswordHasher<Usuario>();
-        return hasher.HashPassword(usuario, password);
-    }
-
-    public bool VerifyPassword(Usuario usuario, string password, string hashedPassword)
-    {
-        var hasher = new PasswordHasher<Usuario>();
-        var result = hasher.VerifyHashedPassword(usuario, hashedPassword, password);
-        return result == PasswordVerificationResult.Success;
     }
 }

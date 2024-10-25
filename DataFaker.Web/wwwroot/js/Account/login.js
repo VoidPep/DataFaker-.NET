@@ -13,6 +13,12 @@
             dataType: 'json',
             success: function (data) {
                 console.log(data)
+
+                if (!data.data && data.message) {
+                    alert(data.message)
+
+                    return
+                }
                 location.href = "/";
             },
             error: function (error) {
